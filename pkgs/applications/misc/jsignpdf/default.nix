@@ -11,9 +11,18 @@ maven.buildMavenPackage rec {
     hash = "sha256-JUKPFemfdysRz/cWkX6Yr8SLuFCZwkd/IPcY1QcqTeo=";
   };
 
-  #mvnHash = "sha256-kLpjMj05uC94/5vGMwMlFzLKNFOKeyNvq/vmB6pHTAo=";
+  mvnHash = "sha256-5f13//+ybJEhZDPY/yluncxM7+ruOwPhx7a+T+Tn/04=";
 
   nativeBuildInputs = [ makeWrapper ];
+
+  installPhase = ''
+    mkdir -p $out/bin
+
+    echo "list of current directory"
+    ls -l
+    cp -r . $out/bin
+    echo "finished with build"
+    '';
 
   meta = {
     description = "JSignPdf is a Java application which adds digital signatures to PDF documents. The application uses the OpenPDF library for PDF manipulations.";
