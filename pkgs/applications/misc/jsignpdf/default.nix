@@ -16,12 +16,17 @@ maven.buildMavenPackage rec {
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
-    mkdir -p $out/bin
+    mkdir -p $out/bin $out/share/jsignpdf
 
-    echo "list of current directory"
-    ls -l
-    cp -r . $out/bin
+    install -Dm644 jsignpdf/target/jsignpdf-2.2.2.jar $out/share/jsignpdf
+
+    #echo "list of current directory"
+    #ls -l
+    #cp -r jsignpdf/target/jsignpdf-2.2.2.jar $out/bin/jsignpdf-2.2.2.jar
     echo "finished with build"
+
+    makeWrapper ${jre}/bin/java $out/bin/jsignpdf \
+      --add-flags "-jar $out/share/jsignpdf/jsignpdf.jar"
     '';
 
   meta = {
