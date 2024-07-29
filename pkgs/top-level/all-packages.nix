@@ -9293,6 +9293,8 @@ with pkgs;
 
   jupyter = callPackage ../applications/editors/jupyter { };
 
+  jsignpdf = callPackage ../applications/misc/jsignpdf { };
+
   jupyter-all = jupyter.override {
     definitions = {
       clojure = clojupyter.definition;
